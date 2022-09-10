@@ -5,6 +5,10 @@ VisualStudioVersion = 17.3.32811.315
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Escola", "Escola.csproj", "{849EB43F-CAA8-4114-9FD3-EB86DC18E36B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EscolaJSON", "EscolaJSON", "{4608D035-BC4B-44A0-9502-B49A9B547DA5}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EscolaSQL", "EscolaSQL", "{6889F40A-ABBB-4081-93FD-F93804F7E7D8}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,6 +22,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{849EB43F-CAA8-4114-9FD3-EB86DC18E36B} = {4608D035-BC4B-44A0-9502-B49A9B547DA5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9C487BC0-F671-41BD-8D15-94D14FF26584}
