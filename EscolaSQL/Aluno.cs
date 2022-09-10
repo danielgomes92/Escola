@@ -52,7 +52,18 @@ namespace Escola
         {
             using (var cnn = new SqlConnection(Aluno.stringConexaoSql()))
             {
-                var comand = new SqlCommand("select * from alunos", cnn);
+                using (var cmd = new SqlCommand("select * from alunos", cnn)) // cmd = Command
+                {
+                    using (SqlDataReader dr = cmd.ExecuteReader()) // dr = Data Reader
+                    {
+                        while (dr.Read()) // enquanto estiver lendo vai ser transformado na lista de aluno
+                        {
+                            var aluno = new Aluno();
+                            aluno.Nome = dr["nome"].ToString();
+                            aluno.Matricula = dr["matricula"].ToString();
+                        }
+                    }
+                }
             }
 
             return Aluno.alunos;
