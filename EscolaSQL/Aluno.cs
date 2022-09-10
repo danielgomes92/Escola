@@ -65,23 +65,12 @@ namespace Escola
                             aluno.Nome = dr["nome"].ToString();
                             aluno.Matricula = dr["matricula"].ToString();
 
-                            
-                            using (var cmdNotas = new SqlCommand("select * from notas where aluno_id=" + aluno.Id, cnn)) // cmd = Command
-                            {
-                                using (SqlDataReader drNotas = cmdNotas.ExecuteReader()) // dr = Data Reader
-                                {
-                                    aluno.Notas = new List<double>();
-                                    while (drNotas.Read()) // enquanto estiver lendo vai ser transformado na lista de aluno
-                                    {
-                                        aluno.Notas.Add(Convert.ToDouble(drNotas["nota"]));
-
-                                    }
-                                }
-                            }
-                            
+                            Aluno.alunos.Add(aluno);
+                                                                                    
                         }
                     }
                 }
+                cnn.Close();
             }
 
             return Aluno.alunos;
@@ -109,6 +98,7 @@ namespace Escola
         {
             using (var cnn = new SqlConnection(Aluno.stringConexaoSql()))
             {
+                cnn.Open();
                 var cmd = new SqlCommand("insert into alunos(nome, matricula) values (@nome, @matricula);select @@identity", cnn);
                 cmd.Parameters.AddWithValue("@nome", aluno.Nome);
                 cmd.Parameters.AddWithValue("@matricula", aluno.Matricula);
@@ -117,10 +107,11 @@ namespace Escola
                 foreach (var nota in aluno.Notas)
                 {
                     var cmdNota = new SqlCommand("insert into notas(aluno_id, nota) values (@aluno_id, @nota)", cnn);
-                    cmd.Parameters.AddWithValue("@aluno_id", aluno_id);
-                    cmd.Parameters.AddWithValue("@nota", nota);
+                    cmdNota.Parameters.AddWithValue("@aluno_id", aluno_id);
+                    cmdNota.Parameters.AddWithValue("@nota", nota);
                     cmdNota.ExecuteNonQuery();
                 }
+                cnn.Close();
             }
         }
     }
