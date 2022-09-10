@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -35,7 +36,7 @@ namespace Escola
         }
 
         private static List<Aluno> alunos = new List<Aluno>();
-        public static List<Aluno> Todos()
+        public static List<Aluno> TodosJson()                       //JSON
         {
             if (File.Exists(Aluno.CaminhoJson()))
             {
@@ -46,14 +47,30 @@ namespace Escola
             return Aluno.alunos;
         }
 
+        //SQL
+        public static List<Aluno> TodosSql()                       //SQL
+        {
+            using (var cnn = new SqlConnection(Aluno.stringConexaoSql()))
+            {
+                var comand = new SqlCommand("select * from alunos", cnn);
+            }
+
+            return Aluno.alunos;
+        }
+        private static string stringConexaoSql()
+        {
+            return System.Configuration.ConfigurationManager.AppSettings["conexao_sql"];
+        }
+        //SQL
+
         private static string CaminhoJson()
         {
             return System.Configuration.ConfigurationManager.AppSettings["caminho_json"];
         }
 
-        public static void Adicionar(Aluno aluno)
+        public static void AdicionarJson(Aluno aluno)       //JSON
         {
-            Aluno.alunos = Aluno.Todos();
+            Aluno.alunos = Aluno.TodosJson();                        //JSON
             Aluno.alunos.Add(aluno);
             string caminho = @"E:\PersistenciadeDados\alunos.json";
             File.WriteAllText(Aluno.CaminhoJson(), JsonConvert.SerializeObject(Aluno.alunos));

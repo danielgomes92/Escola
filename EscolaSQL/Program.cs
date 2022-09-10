@@ -44,14 +44,14 @@ namespace Escola
         {
             Console.Clear();
 
-            if (Aluno.Todos().Count == 0)
+            if (Aluno.TodosJson().Count == 0)           //JSON
             {
                 Console.WriteLine("Nenhum aluno cadastrado!");
                 Thread.Sleep(2000);
                 return;
             }
 
-            foreach (var aluno in Aluno.Todos())
+            foreach (var aluno in Aluno.TodosJson())   //JSON
             {
                 Console.WriteLine("--------------------------------------");
                 Console.WriteLine("Nome: " + aluno.Nome);
@@ -87,7 +87,7 @@ namespace Escola
             }
 
             aluno.Notas = listaNotas;
-            Aluno.Adicionar(aluno);
+            Aluno.AdicionarJson(aluno);     //JSON
 
             Console.Clear();
             Console.WriteLine("Aluno cadastrado com sucesso!");
