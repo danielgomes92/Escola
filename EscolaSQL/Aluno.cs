@@ -51,6 +51,7 @@ namespace Escola
         //SQL
         public static List<Aluno> TodosSql()                       //SQL
         {
+            Aluno.alunos = new List<Aluno>();
             using (var cnn = new SqlConnection(Aluno.stringConexaoSql()))
             {
                 cnn.Open();
