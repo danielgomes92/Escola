@@ -53,6 +53,7 @@ namespace Escola
         {
             using (var cnn = new SqlConnection(Aluno.stringConexaoSql()))
             {
+                cnn.Open();
                 using (var cmd = new SqlCommand("select * from alunos", cnn)) // cmd = Command
                 {
                     using (SqlDataReader dr = cmd.ExecuteReader()) // dr = Data Reader

@@ -87,7 +87,7 @@ namespace Escola
             }
 
             aluno.Notas = listaNotas;
-            Aluno.AdicionarJson(aluno);     //JSON
+            Aluno.AdicionarSql(aluno);     //JSON -> alterado para SQL
 
             Console.Clear();
             Console.WriteLine("Aluno cadastrado com sucesso!");
