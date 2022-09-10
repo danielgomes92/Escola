@@ -69,6 +69,22 @@ namespace Escola
                                                                                     
                         }
                     }
+
+                    //Outro reader
+                    foreach (var aluno in Aluno.alunos)
+                    {
+                        using (var cmdNotas = new SqlCommand("select * from notas where aluno_id=" + aluno.Id, cnn)) // cmd = Command
+                        {
+                            using (SqlDataReader drNotas = cmdNotas.ExecuteReader()) // dr = Data Reader
+                            {
+                                aluno.Notas = new List<double>();
+                                while (drNotas.Read()) // enquanto estiver lendo vai ser transformado na lista de aluno
+                                {
+                                    aluno.Notas.Add(Convert.ToDouble(drNotas["nota"]));
+                                }
+                            }
+                        }
+                    }  
                 }
                 cnn.Close();
             }
