@@ -43,7 +43,7 @@ namespace Escola
                 var conteudo = File.ReadAllText(Aluno.CaminhoJson());
                 Aluno.alunos = JsonConvert.DeserializeObject<List<Aluno>>(conteudo);
             }
-
+            // solução adicionada pelo professor Breno Cabral.
             return Aluno.alunos==null? new List<Aluno>() : Aluno.alunos;
         }
 
