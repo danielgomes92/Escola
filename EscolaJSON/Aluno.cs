@@ -11,6 +11,8 @@ namespace Escola
 {
     public class Aluno
     {
+        private static List<Aluno> alunos = new List<Aluno>();
+        
         public string Nome { get; set; }
         public string Matricula { get; set; }
         public List<double> Notas { get; set; }
@@ -29,12 +31,11 @@ namespace Escola
             return (this.Media() > 6 ? "Aprovado" : "Reprovado");
         }
 
-        public string NotasFormadata()
+        public string NotasFormatada()
         {
             return string.Join(",", this.Notas);
         }
 
-        private static List<Aluno> alunos = new List<Aluno>();
         public static List<Aluno> Todos()
         {
             if (File.Exists(Aluno.CaminhoJson()))
@@ -43,7 +44,7 @@ namespace Escola
                 Aluno.alunos = JsonConvert.DeserializeObject<List<Aluno>>(conteudo);
             }
 
-            return Aluno.alunos;
+            return Aluno.alunos==null? new List<Aluno>() : Aluno.alunos;
         }
 
         private static string CaminhoJson()

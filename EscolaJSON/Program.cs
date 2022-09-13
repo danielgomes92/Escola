@@ -56,7 +56,7 @@ namespace Escola
                 Console.WriteLine("--------------------------------------");
                 Console.WriteLine("Nome: " + aluno.Nome);
                 Console.WriteLine("Matrícula: " + aluno.Matricula);
-                Console.WriteLine("Notas: " + aluno.NotasFormadata());
+                Console.WriteLine("Notas: " + aluno.NotasFormatada());
                 Console.WriteLine("Média: " + aluno.Media().ToString("#.##"));
                 Console.WriteLine("Situação: " + aluno.Situacao());
                 Console.WriteLine("--------------------------------------");
